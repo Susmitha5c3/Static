@@ -1,12 +1,16 @@
 pipeline {
     agent any
-    stage('Upload to AWS') {
-            steps {
-                retry(2){
-                withAWS(region:'us-east-2',credentials:'aws-static'){
-                    s3Upload(file:'index.html', bucket:'udacityjenkins', path:'')
-                }
+    stages {
+        stage('Upload to AWS') {
+                steps {
+                    retry(2){
+                    withAWS(region:'us-east-2',credentials:'aws-static'){
+                        s3Upload(file:'index.html', bucket:'udacityjenkins', path:'')
+                    }
                 }
             }
+        }
+
     }
+
 }
